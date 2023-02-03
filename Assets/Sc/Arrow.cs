@@ -11,10 +11,11 @@ public class Arrow : MonoBehaviour
     
     private float damage;
 
+
     void Start()
     {
-        firstPosition = new Vector2(-8,0); // ???? ?????? ???????? ???? ???? ????
-        endPosition = new Vector2(9,0); // ???? ???? ???? ????
+        firstPosition = new Vector2(-8,0); 
+        endPosition = new Vector2(9,0);
         transform.position = endPosition;
         Isclick = false;
 
@@ -27,6 +28,11 @@ public class Arrow : MonoBehaviour
         if (Isclick)
             Clicked();
     }
+    public void positionSet(Vector2 _firstPosition, Vector2 _endPosition)
+    {
+        firstPosition = _firstPosition;
+        endPosition = _endPosition;
+    }
 
     private void OnMouseDown()
     {
@@ -36,9 +42,10 @@ public class Arrow : MonoBehaviour
 
     void Clicked()
     {
-        
         transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime);
     }
+
+    
 
 
 
