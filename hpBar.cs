@@ -7,6 +7,8 @@ public class hpBar : MonoBehaviour
     public static hpBar instance;
     public float hp;
 
+    public bool fireTrig = false;
+
     void Awake()
     {
         if (instance == null)
@@ -36,8 +38,13 @@ public class hpBar : MonoBehaviour
         
     }
 
+
     public void updateHP(float damage)
     {
+        if (fireTrig)
+        {
+            damage = 100;
+        }
         hp += damage;
         print(hp);
     }
