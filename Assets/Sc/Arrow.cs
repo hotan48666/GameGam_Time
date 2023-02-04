@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] Vector2 endPosition;
     [SerializeField] bool Isclick;
     [SerializeField] bool IsNormal;
+    [SerializeField] bool IsFire;
     [SerializeField] public int number;
     private float damage;
 
@@ -51,7 +52,6 @@ public class Arrow : MonoBehaviour
         Isclick = true;
         
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.arrow, number);
-        hpBar.instance.updateHP(damage);
     }
 
     void ReverseMove()
@@ -69,5 +69,27 @@ public class Arrow : MonoBehaviour
         IsNormal = true;
     }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "fire")
+        {
+            if(IsFire)
+            {
+                IsFire = false;
+                damage /= 2;
+            }
+            if(!IsFire)
+            {
+                IsFire = true;
+                damage *= 2; 
+            }
+        }
+        if(collision.gameObject.tag == "enemy")
+        {
+            Enemy e = collision.gameObject.GetComponent<Enemy>();
+            e.updateHP(damage);
+        }
+    }
 
 }

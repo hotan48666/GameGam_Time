@@ -23,12 +23,16 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (instanceGM != this)    instanceGM = this;
+        if (instanceGM != this) { 
+            instanceGM = this;
+            DontDestroyOnLoad(gameObject);
+        }
 
         IsLastAnimationFinished = false;
         ObjFunctionNum = new List<KeyValuePair<Type, int>>();
 
         a = new Arrow[arrowStartPos.Length];
+        f = new FireRotation[fireStartPos.Length];
         for (int i = 0; i < arrowStartPos.Length; i++)
         {
             GameObject imsiArrow = Instantiate(arrowObj, arrowStartPos[i], Quaternion.Euler(0, 0, 0));
