@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,11 +11,13 @@ public class GameManager : MonoBehaviour
     public Vector2[] arrowEndPos;
     public bool[] arrowFire;
     public Vector2[] firePos;
+
     Arrow[] a;
     FireRotation[] f;
 
     public Enemy e;
     int count;
+    public GameObject nextUI;
 
     
     public enum Type {arrow, fire};
@@ -29,9 +32,10 @@ public class GameManager : MonoBehaviour
     {
         if (instanceGM != this) { 
             instanceGM = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
 
+        nextUI.SetActive(false);
         IsLastAnimationFinished = false;
         ObjFunctionNum = new List<KeyValuePair<Type, int>>();
 
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
         if (e.Result())
         {
             Debug.Log("¼º°ø!");
+            nextUI.SetActive(true);
         }
         else
         {
@@ -120,5 +125,18 @@ public class GameManager : MonoBehaviour
     public void startCor()
     {
         StartCoroutine(NormalPlay());
+    }
+
+    public void SecondStage()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+    public void FinalStage()
+    {
+        SceneManager.LoadScene("FinalScene");
+    }
+    public void Ending()
+    {
+        SceneManager.LoadScene("Ending");
     }
 }

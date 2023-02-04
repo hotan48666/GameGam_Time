@@ -14,9 +14,9 @@ public class IntroToInGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetMouseButtonUp(0))
         {
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("FirstStage");
         }
     }
 }

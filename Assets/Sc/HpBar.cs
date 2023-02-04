@@ -9,6 +9,6 @@ public class HpBar : MonoBehaviour
 
     void Update()
     {
-        transform.position = enemy.position + new Vector3(0, 1.5f, 0);
+        transform.position = enemy.position + new Vector3(0, 1.5f*enemy.transform.localScale.y, 0);
     }
 }

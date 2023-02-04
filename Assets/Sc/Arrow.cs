@@ -70,7 +70,6 @@ public class Arrow : MonoBehaviour
     private void OnMouseDown()
     {
         Isclick = true;
-
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.arrow, number);
     }
 
