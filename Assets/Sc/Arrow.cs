@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-
+    public Animator animator;
     [SerializeField] Vector2 firstPosition;
     [SerializeField] Vector2 endPosition;
     [SerializeField] bool Isclick;
@@ -16,13 +16,16 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
         transform.position = endPosition;
         Isclick = false;
         IsNormal = false;
-        damage = 50;
+        damage = 100;
+        IsFire = true;
+        SetAnim(IsFire);
     }
 
-    
+
     void Update()
     {
         if (Isclick)
@@ -44,6 +47,12 @@ public class Arrow : MonoBehaviour
             }
         }
     }
+
+    void SetAnim(bool check)
+    {
+        animator.SetBool("IsFire", check);
+    }
+
     public void positionSet(Vector2 _firstPosition, Vector2 _endPosition)
     {
         firstPosition = _firstPosition;
@@ -53,18 +62,18 @@ public class Arrow : MonoBehaviour
     private void OnMouseDown()
     {
         Isclick = true;
-        
+
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.arrow, number);
     }
 
     void ReverseMove()
     {
-        transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime*2);
+        transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime * 2);
     }
 
     public void NormalMove()
     {
-        transform.position = Vector2.Lerp(transform.position, endPosition, Time.deltaTime*2);
+        transform.position = Vector2.Lerp(transform.position, endPosition, Time.deltaTime * 2);
     }
 
     public void IsNormalChange()
@@ -81,13 +90,16 @@ public class Arrow : MonoBehaviour
             if (IsFire)
             {
                 IsFire = false;
-                damage /= 2;
+                damage = 50;
+                SetAnim(IsFire);
             }
-            if (!IsFire)
+            else if (!IsFire)
             {
                 IsFire = true;
-                damage *= 2;
+                damage = 100;
+                SetAnim(IsFire);
             }
+
         }
         if (collision.gameObject.tag == "Enemy")
         {
@@ -97,6 +109,22 @@ public class Arrow : MonoBehaviour
             else if (IsNormal)
                 e.updateHP_Reverse(damage);
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
+            p.AttackAnimation();
+            IsFire = false;
+            damage = 50;
+            SetAnim(IsFire);
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
+            p.AttackAnimation();
+        }
+     }
 }

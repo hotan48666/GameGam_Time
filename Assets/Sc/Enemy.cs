@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,20 +16,42 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        updateHP(0.01f);
+        
     }
 
     public void updateHP(float damage)
     {
-        hp += damage;
-        hpbar.fillAmount += damage;
+        StartCoroutine(hpUp((hp +  damage)));
     }
 
     public void updateHP_Reverse(float damage)
     {
-        hp -= damage;
-        hpbar.fillAmount -= damage;
+       StartCoroutine( hpDown((hp - damage)));
     }
+
+    IEnumerator hpUp(float target)
+    {
+        float nowhp = hp;
+            for(int i=0;i<10;i++)
+            {
+                hp += (target - nowhp) / 10;
+                hpbar.fillAmount = hp / 100;
+                yield return new WaitForFixedUpdate();
+            }
+        
+    }
+    IEnumerator hpDown(float target)
+    {
+        float nowhp = hp;
+        for (int i = 0; i < 10; i++)
+        {
+            hp-= (nowhp- target) / 10; 
+            hpbar.fillAmount = hp / 100;
+            yield return new WaitForFixedUpdate();
+        }
+        
+    }
+
 
     public bool Result()
     {
