@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject fireObj;
     public Vector2[] arrowStartPos;
     public Vector2[] arrowEndPos;
+    public bool[] arrowFire;
     public Vector2[] firePos;
     Arrow[] a;
     FireRotation[] f;
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Enemy e;
     int count;
 
-
+    
     public enum Type {arrow, fire};
     List<KeyValuePair<Type,int>> ObjFunctionNum;
 
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
             a[i] = imsiArrow.GetComponent<Arrow>();
             a[i].positionSet(arrowStartPos[i],arrowEndPos[i]);
             a[i].number = i;
+            a[i].IsFire = arrowFire[i];
         }
         for (int i = 0; i < firePos.Length; i++)
         {

@@ -9,7 +9,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] Vector2 endPosition;
     [SerializeField] bool Isclick;
     [SerializeField] bool IsNormal;
-    [SerializeField] bool IsFire;
+    public bool IsFire;
     [SerializeField] public int number;
     [SerializeField] private float damage;
 
@@ -20,9 +20,10 @@ public class Arrow : MonoBehaviour
         transform.position = endPosition;
         Isclick = false;
         IsNormal = false;
-        damage = 100;
-        IsFire = true;
-        SetAnim(IsFire);
+        if (IsFire)
+            FireOn();
+        else
+            FireOff();
     }
 
 
@@ -81,6 +82,18 @@ public class Arrow : MonoBehaviour
         IsNormal = true;
     }
 
+    void FireOn()
+    {
+        IsFire = true;
+        damage = 100;
+        SetAnim(IsFire);
+    }
+    void FireOff()
+    {
+        IsFire = false;
+        damage = 50;
+        SetAnim(IsFire);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -89,15 +102,11 @@ public class Arrow : MonoBehaviour
         {
             if (IsFire)
             {
-                IsFire = false;
-                damage = 50;
-                SetAnim(IsFire);
+                FireOff();
             }
             else if (!IsFire)
             {
-                IsFire = true;
-                damage = 100;
-                SetAnim(IsFire);
+                FireOn();
             }
 
         }
@@ -113,9 +122,7 @@ public class Arrow : MonoBehaviour
         {
             PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
             p.AttackAnimation();
-            IsFire = false;
-            damage = 50;
-            SetAnim(IsFire);
+            FireOff();
         }
     }
 
