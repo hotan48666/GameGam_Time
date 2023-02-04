@@ -65,20 +65,34 @@ public class FireRotation : MonoBehaviour
 
         }
 
-        //if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
-        //    && Mathf.Abs(transform.rotation.eulerAngles.z - 270) >= 0.1f)
-        //{
-        //    RotationIdle(true);
-        //}
-        //else
-        //{
-        //    RotationIdle(false);
-        //}
+
+        if (Isclick)
+        {
+            RotationMove();
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
+                Isclick = false;
+        }
+
+       
+
+        if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
+            && Mathf.Abs(transform.rotation.eulerAngles.z - 270) >= 0.1f)
+        {
+            RotationIdle(true);
+        }
+        else
+        {
+            RotationIdle(false);
+        }
+
     }
 
     private void OnMouseDown()
     {
+
         Isclick = true;
+
+
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.fire, number);
     }
 
