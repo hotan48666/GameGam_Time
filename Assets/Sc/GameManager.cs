@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
                     a[ObjFunctionNum[i].Value].IsNormalChange();
                     break;
                 case Type.fire:
-                    a[ObjFunctionNum[i].Value].IsNormalChange();
+                    f[ObjFunctionNum[i].Value].IsNormalChange();
                     break;
             }
 
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             if (IsLastAnimationFinished)
             {
                 IsLastAnimationFinished = false;
-                i++;
+                i++; 
             }
         }
 
