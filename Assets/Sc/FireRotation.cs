@@ -14,7 +14,7 @@ public class FireRotation : MonoBehaviour
 
     private void Start()
     {
-        transform.localEulerAngles = new Vector3(0.0f, 0.0f, -90.0f);
+        //transform.localEulerAngles = new Vector3(0.0f, 0.0f, -90.0f);
     }
 
     void RotationMove()
