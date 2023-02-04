@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
     public void countObj()
     {
         count++;
-        if (count >= 2)
+        if (count >= firePos.Length + arrowStartPos.Length)
             Invoke("startCor", 1.0f);
     }
     // Test Function
