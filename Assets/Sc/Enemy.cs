@@ -56,9 +56,25 @@ public class Enemy : MonoBehaviour
     public bool Result()
     {
         if (hp == 0)
+        {
+            StartCoroutine("FadeOut");
             return true;
+        }
         else
             return false;
     }
-
+    
+    IEnumerator FadeOut()
+    {
+        SpriteRenderer s = GetComponent<SpriteRenderer>();
+        float fadeCount = 0;
+        while (fadeCount <= 1.0f)
+        {
+            fadeCount += 0.05f;
+            yield return new WaitForSeconds(0.01f);
+            s.color = new Color(s.color.r, s.color.g, s.color.b, fadeCount);
+        }
+        gameObject.SetActive(false);
+        
+    }
 }

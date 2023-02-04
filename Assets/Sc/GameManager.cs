@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         {
             GameObject imsiFire = Instantiate(fireObj, firePos[i], Quaternion.Euler(0, 0, 0));
             f[i] = imsiFire.GetComponent<FireRotation>();
-            //f[i].positionSet(arrowStartPos[i], arrowEndPos[i]);
             f[i].number = i;
         }
 
@@ -74,6 +73,7 @@ public class GameManager : MonoBehaviour
         int i = 0;
         while(i<ObjFunctionNum.Count)
         {
+            
             switch (ObjFunctionNum[i].Key)
             {
                 case Type.arrow:
@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
     public void LasAnimationFinished()
     {
         IsLastAnimationFinished = true;
+        Debug.Log("111");
     }
 
 
