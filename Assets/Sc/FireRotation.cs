@@ -8,20 +8,22 @@ public class FireRotation : MonoBehaviour
 
     public Animator animator;
     private float rotateSpeed = -90;
+    private const float DOWNSTATE = -90.0f;
+    private const float STANDSTATE = 0;
     [SerializeField] private bool Isclick;
     [SerializeField] private bool IsNormal;
     [SerializeField] public int number;
 
     private void Start()
     {
-        transform.localEulerAngles = new Vector3(0.0f, 0.0f, -90.0f);
+        transform.localEulerAngles = new Vector3(0.0f, 0.0f, DOWNSTATE);
+        Isclick = false;
+        IsNormal = false;
     }
 
     void RotationMove()
     {
-        Isclick = false;
-        IsNormal = false;
-        transform.Rotate(0, 0, Time.deltaTime * rotateSpeed,Space.Self);
+        transform.Rotate(0, 0, Time.deltaTime * rotateSpeed, Space.Self);
     }
 
     void StandMove()
@@ -44,20 +46,22 @@ public class FireRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (Isclick && Mathf.Abs(transform.rotation.eulerAngles.z-270) >= 1f)
-         {
-             RotationMove();
-             if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
-               Isclick = false;
+        if (Isclick)
+        {
+            RotationMove();
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
+                Isclick = false;
         }
 
-        if (IsNormal && Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 90f)
+        if (IsNormal)
         {
             StandMove();
             if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 90f)
             {
                 IsNormal = false;
+                GameManager.instanceGM.LasAnimationFinished();
             }
+
         }
 
         if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
@@ -82,6 +86,7 @@ public class FireRotation : MonoBehaviour
     {
         IsNormal = true;
     }
+
 
 }
 

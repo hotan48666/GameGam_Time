@@ -460,10 +460,10 @@ MonoBehaviour:
   - {x: -7, y: 0}
   arrowEndPos:
   - {x: 8, y: 0}
-  fireStartPos:
+  firePos:
   - {x: 3.5, y: -1}
-  fireEndPos:
-  - {x: 3.5, y: -1}
+  fireStartRot: []
+  fireEndRot: []
   e: {fileID: 1916882628}
 --- !u!4 &605636568
 Transform:
@@ -882,7 +882,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

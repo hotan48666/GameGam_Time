@@ -32,6 +32,12 @@ public class Enemy : MonoBehaviour
         Debug.Log(hp);
     }
 
+    public void updateHP_Reverse(float damage)
+    {
+        hp -= damage;
+        Debug.Log(hp);
+    }
+
     public bool Result()
     {
         if (hp == 100)

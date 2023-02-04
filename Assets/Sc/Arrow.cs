@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour
         transform.position = endPosition;
         Isclick = false;
         IsNormal = false;
-        damage = 30;
+        damage = 50;
     }
 
     
@@ -70,26 +70,29 @@ public class Arrow : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.collider.gameObject.tag);
-        if(collision.collider.gameObject.tag == "Fire")
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "Fire")
         {
-            if(IsFire)
+            if (IsFire)
             {
                 IsFire = false;
                 damage /= 2;
             }
-            if(!IsFire)
+            if (!IsFire)
             {
                 IsFire = true;
-                damage *= 2; 
+                damage *= 2;
             }
         }
-        if(collision.collider.gameObject.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
             Enemy e = collision.gameObject.GetComponent<Enemy>();
-            e.updateHP(damage);
+            if (Isclick)
+                e.updateHP(damage);
+            else if (IsNormal)
+                e.updateHP_Reverse(damage);
         }
     }
 

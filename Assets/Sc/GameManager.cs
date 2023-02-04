@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject fireObj;
     public Vector2[] arrowStartPos;
     public Vector2[] arrowEndPos;
-    public Vector2[] fireStartPos;
-    public Vector2[] fireEndPos;
+    public Vector2[] firePos;
     Arrow[] a;
     FireRotation[] f;
 
@@ -34,7 +33,7 @@ public class GameManager : MonoBehaviour
         ObjFunctionNum = new List<KeyValuePair<Type, int>>();
 
         a = new Arrow[arrowStartPos.Length];
-        f = new FireRotation[fireStartPos.Length];
+        f = new FireRotation[firePos.Length];
         for (int i = 0; i < arrowStartPos.Length; i++)
         {
             GameObject imsiArrow = Instantiate(arrowObj, arrowStartPos[i], Quaternion.Euler(0, 0, 0));
@@ -42,9 +41,9 @@ public class GameManager : MonoBehaviour
             a[i].positionSet(arrowStartPos[i],arrowEndPos[i]);
             a[i].number = i;
         }
-        for (int i = 0; i < fireStartPos.Length; i++)
+        for (int i = 0; i < firePos.Length; i++)
         {
-            GameObject imsiFire = Instantiate(fireObj, fireStartPos[i], Quaternion.Euler(0, 0, 0));
+            GameObject imsiFire = Instantiate(fireObj, firePos[i], Quaternion.Euler(0, 0, 0));
             f[i] = imsiFire.GetComponent<FireRotation>();
             //f[i].positionSet(arrowStartPos[i], arrowEndPos[i]);
             f[i].number = i;
