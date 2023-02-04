@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc6a13368475334684b50c1f3fe5691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 2800000, guid: 5c83c58af9b9fb44e9a8615b31d09c14, type: 3}
-  original: {fileID: 2800000, guid: cef3657d0eccc414d8083aaa57f54fd8, type: 3}
+  chageCursor: {fileID: 2800000, guid: 5c83c58af9b9fb44e9a8615b31d09c14, type: 3}
+  originalCursor: {fileID: 2800000, guid: cef3657d0eccc414d8083aaa57f54fd8, type: 3}
 --- !u!114 &8721967105769491709
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     bool IsLastAnimationFinished;
 
     public static GameManager instanceGM;
-    
+     
 
     void Awake()
     {
