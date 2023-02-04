@@ -19,7 +19,8 @@ public class Arrow : MonoBehaviour
         transform.position = endPosition;
         Isclick = false;
         IsNormal = false;
-        damage = 50;
+        IsFire = true;
+        damage = 100;
     }
 
     
@@ -72,18 +73,18 @@ public class Arrow : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Fire")
         {
             if (IsFire)
             {
                 IsFire = false;
-                damage /= 2;
+                damage =50;
             }
             if (!IsFire)
             {
                 IsFire = true;
-                damage *= 2;
+                damage = 100;
             }
         }
         if (collision.gameObject.tag == "Enemy")
@@ -93,6 +94,10 @@ public class Arrow : MonoBehaviour
                 e.updateHP(damage);
             else if (IsNormal)
                 e.updateHP_Reverse(damage);
+        }
+        if(collision.gameObject.tag=="player")
+        {
+            damage = 50;
         }
     }
 

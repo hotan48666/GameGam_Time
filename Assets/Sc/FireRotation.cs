@@ -7,16 +7,17 @@ public class FireRotation : MonoBehaviour
 {
 
     public Animator animator;
-    private float rotateSpeed = -90;
-    private const float DOWNSTATE = -90.0f;
+    private float rotateSpeed = 90.0f;
+    private const float DOWNSTATE = 270.0f;
     private const float STANDSTATE = 0;
     [SerializeField] private bool Isclick;
     [SerializeField] private bool IsNormal;
-    [SerializeField] public int number;
+    public int number;
 
     private void Start()
     {
         transform.localEulerAngles = new Vector3(0.0f, 0.0f, DOWNSTATE);
+        RotationIdle(true);
         Isclick = false;
         IsNormal = false;
     }
@@ -33,14 +34,7 @@ public class FireRotation : MonoBehaviour
 
     void RotationIdle(bool swich)
     {
-        if (swich)
-        {
-            animator.SetBool("IsRotation90", swich);
-        }
-        else
-        {
-            animator.SetBool("IsRotation90", swich);
-        }
+        animator.SetBool("IsRotation90", swich);
     }
 
     // Update is called once per frame
@@ -49,36 +43,42 @@ public class FireRotation : MonoBehaviour
         if (Isclick)
         {
             RotationMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - STANDSTATE) % 360 <= 1f)
+            {
+                RotationIdle(false);
                 Isclick = false;
+                
+            }
+            
         }
 
         if (IsNormal)
         {
+            
             StandMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 90f)
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - DOWNSTATE) % 360 <= 1f)
             {
+                RotationIdle(true);
                 IsNormal = false;
                 GameManager.instanceGM.LasAnimationFinished();
             }
 
         }
 
-        if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
-            && Mathf.Abs(transform.rotation.eulerAngles.z - 270) >= 0.1f)
-        {
-            RotationIdle(true);
-        }
-        else
-        {
-            RotationIdle(false);
-        }
+        //if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
+        //    && Mathf.Abs(transform.rotation.eulerAngles.z - 270) >= 0.1f)
+        //{
+        //    RotationIdle(true);
+        //}
+        //else
+        //{
+        //    RotationIdle(false);
+        //}
     }
 
     private void OnMouseDown()
     {
         Isclick = true;
-
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.fire, number);
     }
 
