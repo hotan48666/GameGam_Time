@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ public class fire : MonoBehaviour
 
     void Start()
     {
-        firstPosition = new Vector2(8, 0); // ???? ?????? ???????? ???? ???? ????
+        firstPosition = new Vector2(8, 0); // 첫뻔째
         endPosition = new Vector2(2, 0); // ???? ???? ???? ????
         transform.position = endPosition;
         Isclick = false;

@@ -1,3 +1,25 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5a9f000d3c9bf94e5bb8b8fb762d2f484d0d74a17b0d1df9bca8d7a5bcf587e5
-size 403
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerAttack : MonoBehaviour
+{
+
+    public Animator animator;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("gogo");
+
+        }
+    }
+}
