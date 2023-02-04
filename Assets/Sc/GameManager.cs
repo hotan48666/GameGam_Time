@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         {
             GameObject imsiFire = Instantiate(fireObj, fireStartPos[i], Quaternion.Euler(0, 0, 0));
             f[i] = imsiFire.GetComponent<FireRotation>();
-            f[i].positionSet(arrowStartPos[i], arrowEndPos[i]);
+            //f[i].positionSet(arrowStartPos[i], arrowEndPos[i]);
             f[i].number = i;
         }
 
@@ -72,7 +72,9 @@ public class GameManager : MonoBehaviour
                 case Type.arrow:
                     a[ObjFunctionNum[i].Value].IsNormalChange();
                     break;
-                case Type.
+                case Type.fire:
+                    a[ObjFunctionNum[i].Value].IsNormalChange();
+                    break;
             }
 
             yield return new WaitForFixedUpdate();
