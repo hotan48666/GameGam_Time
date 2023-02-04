@@ -43,7 +43,7 @@ public class FireRotation : MonoBehaviour
         if (Isclick)
         {
             StandMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - DOWNSTATE) %360 <= 1f)
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - STANDSTATE) %360 <= 1f)
             {
                 Isclick = false;
                 RotationIdle(false);
@@ -51,10 +51,10 @@ public class FireRotation : MonoBehaviour
 
         }
 
-        if (Isclick)
+        if (IsNormal)
         {
             RotationMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f) { 
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - DOWNSTATE) <= 1f) { 
                 IsNormal = false;
                 RotationIdle(true);
                 GameManager.instanceGM.LasAnimationFinished();

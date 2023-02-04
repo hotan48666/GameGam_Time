@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     public bool Result()
     {
-        if (hp == 100)
+        if (hp == 0)
             return true;
         else
             return false;
