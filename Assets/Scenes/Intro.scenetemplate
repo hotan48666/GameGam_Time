@@ -17,15 +17,13 @@ MonoBehaviour:
   description: 
   preview: {fileID: 0}
   dependencies:
-  - dependency: {fileID: 2800000, guid: ee148e281f3c41c5b4ff5f8a5afe5a6c, type: 3}
+  - dependency: {fileID: 7400000, guid: f3664a1dd9864774fb975342ea50ff98, type: 2}
     instantiationMode: 0
-  - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
+  - dependency: {fileID: 9100000, guid: aea44ac7e6aa1f74f841ef2c67bfa593, type: 2}
     instantiationMode: 0
-  - dependency: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-    instantiationMode: 1
-  - dependency: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-    instantiationMode: 1
-  - dependency: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
-    instantiationMode: 1
+  - dependency: {fileID: 2800000, guid: 1e0b08b8ca5782d4480ff3bdbf998a64, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 9100000, guid: 278a810d6f9eb124a90f35ee7f52ef48, type: 2}
+    instantiationMode: 0
   templatePipeline: {fileID: 0}
   addToDefaults: 0
