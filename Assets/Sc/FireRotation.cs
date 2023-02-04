@@ -30,6 +30,13 @@ public class FireRotation : MonoBehaviour
         }
     }
 
+    private void OnMouseDown()
+    {
+        Isclick = true;
+
+        GameManager.instanceGM.MakeFuncArray(GameManager.Type.fire, number);
+    }
+
     public void IsNormalChange()
     {
         IsNormal = true;
