@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -18,8 +18,18 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("gogo");
-
+            AttackAnimation();
+            
         }
+    }
+
+    void AttackAnimation()
+    {
+        animator.SetBool("IsAttack", true);
+    }
+
+    void AttackAnimationEnd()
+    {
+        animator.SetBool("IsAttack", false);
     }
 }
