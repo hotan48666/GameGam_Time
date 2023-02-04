@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     FireRotation[] f;
 
     public Enemy e;
+    int count;
+
 
     public enum Type {arrow, fire};
     List<KeyValuePair<Type,int>> ObjFunctionNum;
@@ -105,6 +107,13 @@ public class GameManager : MonoBehaviour
         IsLastAnimationFinished = true;
     }
 
+
+    public void countObj()
+    {
+        count++;
+        if (count >= 2)
+            Invoke("startCor", 1.0f);
+    }
     // Test Function
     public void startCor()
     {

@@ -14,6 +14,8 @@ public class FireRotation : MonoBehaviour
     [SerializeField] private bool IsNormal;
     [SerializeField] public int number;
 
+    private bool FireObjClearYn = false;
+
     private void Start()
     {
         transform.localEulerAngles = new Vector3(0.0f, 0.0f, DOWNSTATE);
@@ -47,8 +49,8 @@ public class FireRotation : MonoBehaviour
             {
                 Isclick = false;
                 RotationIdle(false);
+                GameManager.instanceGM.countObj();
             }
-
         }
 
         if (IsNormal)

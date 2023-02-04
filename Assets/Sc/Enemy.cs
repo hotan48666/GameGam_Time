@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
         hpbar.fillAmount = hp;
     }
 
+    private void Update()
+    {
+        updateHP(0.01f);
+    }
+
     public void updateHP(float damage)
     {
         hp += damage;

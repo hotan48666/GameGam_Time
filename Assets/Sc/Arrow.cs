@@ -29,7 +29,10 @@ public class Arrow : MonoBehaviour
         {
             ReverseMove();
             if (Mathf.Abs(transform.position.x - firstPosition.x) <= 0.1f)
+            {
+                GameManager.instanceGM.countObj();
                 Isclick = false;
+            }
         }
         if (IsNormal)
         {
