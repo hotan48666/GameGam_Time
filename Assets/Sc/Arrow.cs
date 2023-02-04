@@ -4,39 +4,43 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-
+    public Animator animator;
     [SerializeField] Vector2 firstPosition;
     [SerializeField] Vector2 endPosition;
     [SerializeField] bool Isclick;
     [SerializeField] bool IsNormal;
-    [SerializeField] bool IsFire;
+    public bool IsFire;
     [SerializeField] public int number;
     [SerializeField] private float damage;
-
-
     public AudioSource sound;
     public AudioSource soundR;
 
+
     void Start()
     {
+        animator = gameObject.GetComponent<Animator>();
         transform.position = endPosition;
         Isclick = false;
         IsNormal = false;
-        damage = 50;
-
+        if (IsFire)
+            FireOn();
+        else
+            FireOff();
         sound = GetComponent<AudioSource>();
         soundR = GetComponent<AudioSource>();
-
     }
 
-    
+
     void Update()
     {
         if (Isclick)
         {
             ReverseMove();
             if (Mathf.Abs(transform.position.x - firstPosition.x) <= 0.1f)
+            {
+                GameManager.instanceGM.countObj();
                 Isclick = false;
+            }
         }
         if (IsNormal)
         {
@@ -48,6 +52,12 @@ public class Arrow : MonoBehaviour
             }
         }
     }
+
+    void SetAnim(bool check)
+    {
+        animator.SetBool("IsFire", check);
+    }
+
     public void positionSet(Vector2 _firstPosition, Vector2 _endPosition)
     {
         firstPosition = _firstPosition;
@@ -57,20 +67,20 @@ public class Arrow : MonoBehaviour
     private void OnMouseDown()
     {
         Isclick = true;
-        
+
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.arrow, number);
     }
 
     void ReverseMove()
     {
-        sound.Play();
-        transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime*2);
+        soundR.Play();
+        transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime * 2);
     }
 
     public void NormalMove()
     {
         sound.Play();
-        transform.position = Vector2.Lerp(transform.position, endPosition, Time.deltaTime*2);
+        transform.position = Vector2.Lerp(transform.position, endPosition, Time.deltaTime * 2);
     }
 
     public void IsNormalChange()
@@ -78,6 +88,18 @@ public class Arrow : MonoBehaviour
         IsNormal = true;
     }
 
+    void FireOn()
+    {
+        IsFire = true;
+        damage = 100;
+        SetAnim(IsFire);
+    }
+    void FireOff()
+    {
+        IsFire = false;
+        damage = 50;
+        SetAnim(IsFire);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -86,14 +108,13 @@ public class Arrow : MonoBehaviour
         {
             if (IsFire)
             {
-                IsFire = false;
-                damage /= 2;
+                FireOff();
             }
-            if (!IsFire)
+            else if (!IsFire)
             {
-                IsFire = true;
-                damage *= 2;
+                FireOn();
             }
+
         }
         if (collision.gameObject.tag == "Enemy")
         {
@@ -103,6 +124,20 @@ public class Arrow : MonoBehaviour
             else if (IsNormal)
                 e.updateHP_Reverse(damage);
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
+            p.AttackAnimation();
+            FireOff();
+        }
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
+            p.AttackAnimation();
+        }
+    }
 }

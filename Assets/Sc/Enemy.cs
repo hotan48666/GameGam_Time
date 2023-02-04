@@ -8,10 +8,13 @@ public class Enemy : MonoBehaviour
 {
     public float hp;
     public Image hpbar;
+    public Animator enemyAnimator;
 
     void Start()
     {
         hpbar.fillAmount = hp;
+        enemyAnimator = GetComponent<Animator>();
+        enemyAnimator.SetBool("IsDeath", true);
     }
 
     private void Update()
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour
     public void updateHP(float damage)
     {
         StartCoroutine(hpUp((hp +  damage)));
+        enemyAnimator.SetBool("IsDeath", false);
     }
 
     public void updateHP_Reverse(float damage)
@@ -49,7 +53,9 @@ public class Enemy : MonoBehaviour
             hpbar.fillAmount = hp / 100;
             yield return new WaitForFixedUpdate();
         }
-        
+        if(hp==0)
+            enemyAnimator.SetBool("IsDeath", true);
+
     }
 
 
@@ -68,10 +74,10 @@ public class Enemy : MonoBehaviour
     {
         SpriteRenderer s = GetComponent<SpriteRenderer>();
         float fadeCount = 0;
-        while (fadeCount <= 1.0f)
+        while (fadeCount < 1.0f)
         {
             fadeCount += 0.05f;
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.03f);
             s.color = new Color(s.color.r, s.color.g, s.color.b, fadeCount);
         }
         gameObject.SetActive(false);

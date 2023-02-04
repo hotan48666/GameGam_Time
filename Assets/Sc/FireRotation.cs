@@ -8,86 +8,74 @@ public class FireRotation : MonoBehaviour
 
     public Animator animator;
     private float rotateSpeed = -90;
-    private const float DOWNSTATE = -90.0f;
+    private const float DOWNSTATE = 270.0f;
     private const float STANDSTATE = 0;
     [SerializeField] private bool Isclick;
     [SerializeField] private bool IsNormal;
     [SerializeField] public int number;
 
+    private bool FireObjClearYn = false;
     public AudioSource sound;
     public AudioSource soundR;
 
     private void Start()
     {
         transform.localEulerAngles = new Vector3(0.0f, 0.0f, DOWNSTATE);
+        RotationIdle(true);
         Isclick = false;
         IsNormal = false;
-
         sound = GetComponent<AudioSource>();
         soundR = GetComponent<AudioSource>();
     }
 
     void RotationMove()
     {
-        sound.Play();
         transform.Rotate(0, 0, Time.deltaTime * rotateSpeed, Space.Self);
     }
 
     void StandMove()
     {
-        soundR.Play();
         transform.Rotate(0, 0, Time.deltaTime * -rotateSpeed, Space.Self);
     }
 
     void RotationIdle(bool swich)
     {
-        if (swich)
-        {
-            animator.SetBool("IsRotation90", swich);
-        }
-        else
-        {
-            animator.SetBool("IsRotation90", swich);
-        }
+        animator.SetBool("IsRotation90", swich);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IsNormal)
-        {
-            StandMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 90f)
-            {
-                IsNormal = false;
-                GameManager.instanceGM.LasAnimationFinished();
-            }
-
-        }
-
         if (Isclick)
         {
-            RotationMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
+            StandMove();
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - STANDSTATE) % 360 <= 1f)
+            {
                 Isclick = false;
+                RotationIdle(false);
+                GameManager.instanceGM.countObj();
+            }
         }
 
-       
+        if (IsNormal)
+        {
+            RotationMove();
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - DOWNSTATE) <= 1f)
+            {
+                IsNormal = false;
+                RotationIdle(true);
+                GameManager.instanceGM.LasAnimationFinished();
+            }
+        }
 
-        if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
-            && Mathf.Abs(transform.rotation.eulerAngles.z - 270) >= 0.1f)
-        {
-            RotationIdle(true);
-        }
-        else
-        {
-            RotationIdle(false);
-        }
+
+
+
     }
 
     private void OnMouseDown()
     {
-        IsNormal = true;
+        Isclick = true;
 
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.fire, number);
     }
