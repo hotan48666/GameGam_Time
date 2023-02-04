@@ -46,13 +46,6 @@ public class FireRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Isclick)
-        {
-            RotationMove();
-            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
-                Isclick = false;
-        }
-
         if (IsNormal)
         {
             StandMove();
@@ -63,6 +56,15 @@ public class FireRotation : MonoBehaviour
             }
 
         }
+
+        if (Isclick)
+        {
+            RotationMove();
+            if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1f)
+                Isclick = false;
+        }
+
+       
 
         if (Mathf.Abs(transform.rotation.eulerAngles.z - 270) <= 1.0f
             && Mathf.Abs(transform.rotation.eulerAngles.z - 270) >= 0.1f)
@@ -77,7 +79,7 @@ public class FireRotation : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Isclick = true;
+        IsNormal = true;
 
         GameManager.instanceGM.MakeFuncArray(GameManager.Type.fire, number);
     }
