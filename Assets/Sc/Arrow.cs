@@ -14,8 +14,6 @@ public class Arrow : MonoBehaviour
 
     void Start()
     {
-        firstPosition = new Vector2(-8,0); 
-        endPosition = new Vector2(9,0);
         transform.position = endPosition;
         Isclick = false;
 
