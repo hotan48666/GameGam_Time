@@ -6,20 +6,9 @@ using UnityEngine.UI;
 public class HpBar : MonoBehaviour
 {
     public Transform enemy;
-    public Slider hpBar;
-    public float maxHp;
-    public float currentHp;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        transform.position = enemy.position + new Vector3(0, 0, 0);
-        hpBar.value = currentHp/ maxHp;
+        transform.position = enemy.position + new Vector3(0, 1.5f, 0);
     }
 }
