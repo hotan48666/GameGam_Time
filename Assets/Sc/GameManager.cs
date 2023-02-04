@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Vector2[] fireStartPos;
     public Vector2[] fireEndPos;
     Arrow[] a;
+    FireRotation[] f;
 
     public enum Type {arrow, fire};
     List<KeyValuePair<Type,int>> ObjFunctionNum;
@@ -38,6 +39,9 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < fireStartPos.Length; i++)
         {
             GameObject imsiFire = Instantiate(fireObj, fireStartPos[i], Quaternion.Euler(0, 0, 0));
+            f[i] = imsiFire.GetComponent<FireRotation>();
+            f[i].positionSet(arrowStartPos[i], arrowEndPos[i]);
+            f[i].number = i;
         }
 
     }
@@ -68,6 +72,7 @@ public class GameManager : MonoBehaviour
                 case Type.arrow:
                     a[ObjFunctionNum[i].Value].IsNormalChange();
                     break;
+                case Type.
             }
 
             yield return new WaitForFixedUpdate();
