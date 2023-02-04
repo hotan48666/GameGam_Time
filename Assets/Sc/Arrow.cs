@@ -8,7 +8,8 @@ public class Arrow : MonoBehaviour
     [SerializeField] Vector2 firstPosition;
     [SerializeField] Vector2 endPosition;
     [SerializeField] bool Isclick;
-    
+    [SerializeField] bool IsNormal;
+    [SerializeField] public int number;
     private float damage;
 
 
@@ -16,7 +17,7 @@ public class Arrow : MonoBehaviour
     {
         transform.position = endPosition;
         Isclick = false;
-
+        IsNormal = false;
         damage = 30;
     }
 
@@ -24,7 +25,20 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         if (Isclick)
-            Clicked();
+        {
+            ReverseMove();
+            if (Mathf.Abs(transform.position.x - firstPosition.x) <= 0.1f)
+                Isclick = false;
+        }
+        if (IsNormal)
+        {
+            NormalMove();
+            if (Mathf.Abs(transform.position.x - endPosition.x) <= 0.1f)
+            {
+                IsNormal = false;
+                GameManager.instanceGM.LasAnimationFinished();
+            }
+        }
     }
     public void positionSet(Vector2 _firstPosition, Vector2 _endPosition)
     {
@@ -35,16 +49,25 @@ public class Arrow : MonoBehaviour
     private void OnMouseDown()
     {
         Isclick = true;
+        
+        GameManager.instanceGM.MakeFuncArray(GameManager.Type.arrow, number);
         hpBar.instance.updateHP(damage);
     }
 
-    void Clicked()
+    void ReverseMove()
     {
-        transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime);
+        transform.position = Vector2.Lerp(transform.position, firstPosition, Time.deltaTime*2);
     }
 
-    
+    public void NormalMove()
+    {
+        transform.position = Vector2.Lerp(transform.position, endPosition, Time.deltaTime*2);
+    }
 
+    public void IsNormalChange()
+    {
+        IsNormal = true;
+    }
 
 
 }
