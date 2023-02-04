@@ -11,7 +11,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] bool IsNormal;
     [SerializeField] bool IsFire;
     [SerializeField] public int number;
-    private float damage;
+    [SerializeField] private float damage;
 
 
     void Start()
@@ -72,7 +72,8 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "fire")
+        Debug.Log(collision.collider.gameObject.tag);
+        if(collision.collider.gameObject.tag == "Fire")
         {
             if(IsFire)
             {
@@ -85,7 +86,7 @@ public class Arrow : MonoBehaviour
                 damage *= 2; 
             }
         }
-        if(collision.gameObject.tag == "enemy")
+        if(collision.collider.gameObject.tag == "Enemy")
         {
             Enemy e = collision.gameObject.GetComponent<Enemy>();
             e.updateHP(damage);

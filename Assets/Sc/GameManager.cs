@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     Arrow[] a;
     FireRotation[] f;
 
+    public Enemy e;
+
     public enum Type {arrow, fire};
     List<KeyValuePair<Type,int>> ObjFunctionNum;
 
@@ -87,6 +89,15 @@ public class GameManager : MonoBehaviour
                 IsLastAnimationFinished = false;
                 i++;
             }
+        }
+
+        if (e.Result())
+        {
+            Debug.Log("성공!");
+        }
+        else
+        {
+            Debug.Log("실패!");
         }
     }
 
