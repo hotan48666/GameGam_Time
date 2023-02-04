@@ -14,6 +14,7 @@ public class Arrow : MonoBehaviour
     [SerializeField] private float damage;
     public AudioSource sound;
     public AudioSource soundR;
+    PlayerAttack p;
 
 
     void Start()
@@ -44,7 +45,9 @@ public class Arrow : MonoBehaviour
         }
         if (IsNormal)
         {
-            NormalMove();
+            
+            Invoke("NormalMove", 0.5f);
+            
             if (Mathf.Abs(transform.position.x - endPosition.x) <= 0.1f)
             {
                 IsNormal = false;
@@ -80,12 +83,14 @@ public class Arrow : MonoBehaviour
     public void NormalMove()
     {
         sound.Play();
+        p.AttackAnimationEnd();
         transform.position = Vector2.Lerp(transform.position, endPosition, Time.deltaTime * 2);
     }
 
     public void IsNormalChange()
     {
         IsNormal = true;
+        p.AttackAnimation();
     }
 
     void FireOn()
@@ -126,18 +131,11 @@ public class Arrow : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
+            p = collision.gameObject.GetComponent<PlayerAttack>();
             p.AttackAnimation();
             FireOff();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            PlayerAttack p = collision.gameObject.GetComponent<PlayerAttack>();
-            p.AttackAnimation();
-        }
-    }
+
 }

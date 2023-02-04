@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public float hp;
+    public float maxHP;
     public Image hpbar;
     public Animator enemyAnimator;
 
@@ -39,18 +40,18 @@ public class Enemy : MonoBehaviour
             for(int i=0;i<10;i++)
             {
                 hp += (target - nowhp) / 10;
-                hpbar.fillAmount = hp / 100;
+                hpbar.fillAmount = hp / maxHP;
                 yield return new WaitForFixedUpdate();
             }
-        
     }
+
     IEnumerator hpDown(float target)
     {
         float nowhp = hp;
         for (int i = 0; i < 10; i++)
         {
             hp-= (nowhp- target) / 10; 
-            hpbar.fillAmount = hp / 100;
+            hpbar.fillAmount = hp / maxHP;
             yield return new WaitForFixedUpdate();
         }
         if(hp==0)
@@ -73,10 +74,10 @@ public class Enemy : MonoBehaviour
     IEnumerator FadeOut()
     {
         SpriteRenderer s = GetComponent<SpriteRenderer>();
-        float fadeCount = 0;
-        while (fadeCount < 1.0f)
+        float fadeCount = 1.0f;
+        while (fadeCount > 0.0f)
         {
-            fadeCount += 0.05f;
+            fadeCount -= 0.05f;
             yield return new WaitForSeconds(0.03f);
             s.color = new Color(s.color.r, s.color.g, s.color.b, fadeCount);
         }

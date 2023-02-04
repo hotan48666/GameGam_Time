@@ -107,7 +107,6 @@ public class GameManager : MonoBehaviour
     public void LasAnimationFinished()
     {
         IsLastAnimationFinished = true;
-        Debug.Log("111");
     }
 
 

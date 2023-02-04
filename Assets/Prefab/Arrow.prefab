@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c9066a4c1e458d40a7f925faca8bc30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   firstPosition: {x: 0, y: 0}
   endPosition: {x: 0, y: 0}
   Isclick: 0
@@ -146,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.21133333}
+  m_Offset: {x: 0, y: 0.026557013}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -157,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.6304474}
   m_EdgeRadius: 0
 --- !u!114 &8721967105769491710
 MonoBehaviour:
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bc6a13368475334684b50c1f3fe5691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chageCursor: {fileID: 2800000, guid: 5c83c58af9b9fb44e9a8615b31d09c14, type: 3}
+  chageCursor: {fileID: 2800000, guid: aa4bec1cd1680274ebd98308e6b47e54, type: 3}
   originalCursor: {fileID: 2800000, guid: cef3657d0eccc414d8083aaa57f54fd8, type: 3}
 --- !u!114 &8721967105769491709
 MonoBehaviour:
