@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,8 +19,8 @@ public class GameManager : MonoBehaviour
     public Enemy e;
     int count;
     public GameObject nextUI;
+    public GameObject failUI;
 
-    
     public enum Type {arrow, fire};
     List<KeyValuePair<Type,int>> ObjFunctionNum;
 
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
         }
 
         nextUI.SetActive(false);
+        failUI.SetActive(false);
         IsLastAnimationFinished = false;
         ObjFunctionNum = new List<KeyValuePair<Type, int>>();
 
@@ -59,10 +61,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        
-    }
+
 
 
     public void MakeFuncArray(Type type, int num)
@@ -106,7 +105,17 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("½ÇÆÐ!");
+            failUI.SetActive(true);
+            Invoke("Retry", 2.0f);
         }
+    }
+
+
+
+    public void Retry()
+    {
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LasAnimationFinished()

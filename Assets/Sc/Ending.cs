@@ -16,7 +16,7 @@ public class Ending : MonoBehaviour
     {
         Debug.Log("게임종료! 축하드립니다");
 
-        Time.timeScale = 0.0f;
-        //Application.Quit();
+        
+        Application.Quit();
     }
 }

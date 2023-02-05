@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chageCursor: {fileID: 2800000, guid: aa4bec1cd1680274ebd98308e6b47e54, type: 3}
-  originalCursor: {fileID: 2800000, guid: cef3657d0eccc414d8083aaa57f54fd8, type: 3}
+  originalCursor: {fileID: 2800000, guid: 861c9d62bd1b93f4791b3c12f7f1600c, type: 3}
 --- !u!114 &-1216170792980111504
 MonoBehaviour:
   m_ObjectHideFlags: 0

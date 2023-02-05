@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7546203017633452846}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Untagged
+  m_TagString: Arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chageCursor: {fileID: 2800000, guid: aa4bec1cd1680274ebd98308e6b47e54, type: 3}
-  originalCursor: {fileID: 2800000, guid: cef3657d0eccc414d8083aaa57f54fd8, type: 3}
+  originalCursor: {fileID: 2800000, guid: 861c9d62bd1b93f4791b3c12f7f1600c, type: 3}
 --- !u!114 &8721967105769491709
 MonoBehaviour:
   m_ObjectHideFlags: 0
